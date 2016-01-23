@@ -1,6 +1,6 @@
 # Slork
 
-Slork is a Slack wrapper around the text adventure Zork. It forwards commands from Slack through the `zork` binary and returns the output.
+Slork is a Slack wrapper around the text adventure Zork. It forwards commands from Slack through the `zork` binary and returns the output. Games are saved per-channel.
 
 ## Installation
 
@@ -47,3 +47,11 @@ you will explore some of the most amazing territory ever seen by mortal
 man.  Hardened adventurers have run screaming from the terrors contained
 within.
 ```
+
+## Additional commands
+
+There are a couple of Slork-specific commands:
+
+* `!map` "shows" a map
+* `!reset` resets the game
+
