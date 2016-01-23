@@ -13,7 +13,7 @@ Slork is a Slack wrapper around the text adventure Zork. It forwards commands fr
 
 ## Usage
 
-In addition to the configuration at `config/config.ex`, the bot supports a few command-line switches:
+In addition to the configuration at `config/config.exs`, the bot supports a few command-line switches:
 
 ```
 ./slork [--command-prefix PREFIX]
