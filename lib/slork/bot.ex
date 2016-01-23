@@ -2,13 +2,17 @@ defmodule Slork.Bot do
   use GenServer
   use Slack
 
+  alias Slork.SlorkConfig
+
   def start_link do
-    api_token = Slork.get_config(:slack_api_token)
+    IO.puts "Starting bot..."
+
+    api_token = SlorkConfig.get(:slack_api_token)
     unless api_token do
       raise Slork.Bot, message: "Invalid Slack API token: set the environment " <>
                                 "variable SLORK_SLACK_API_TOKEN to a valid token."
     end
-    Slork.Bot.start_link(api_token, [command_prefix: Slork.get_config(:command_prefix)])
+    Slork.Bot.start_link(api_token, [command_prefix: SlorkConfig.get(:command_prefix)])
   end
 
   def handle_message(message = %{type: "message"}, slack, state) do

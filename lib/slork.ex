@@ -1,13 +1,17 @@
 defmodule Slork do
   use Application
 
-  def start(_type, _args) do
+  alias Slork.SlorkConfig
+
+  def start(_type, args) do
     import Supervisor.Spec, warn: false
 
     children = [
       worker(Slork.Bot, []),
       worker(Slork.Game, [])
     ]
+
+    SlorkConfig.start_config(args)
 
     opts = [strategy: :one_for_one, name: Slork.Supervisor]
     Supervisor.start_link(children, opts)

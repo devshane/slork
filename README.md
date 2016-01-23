@@ -14,7 +14,11 @@ $ make
 
 * `mix deps.get`
 * Set the environment variable `SLORK_SLACK_API_TOKEN` to your Slack API Token
-* Start the bot with `iex -S mix`
+* Start the bot
+
+```
+$ ./slork
+```
 
 ## Usage
 
