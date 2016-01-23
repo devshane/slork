@@ -1,16 +1,16 @@
 defmodule Slork.Game do
   use GenServer
-  require Logger
 
-  alias Slork.GameConfig
+  alias Slork.{GameConfig,SlorkConfig}
 
   def start_link do
+    IO.puts "Starting game..."
     GameConfig.start_config
     GenServer.start_link(__MODULE__, [], name: SlorkGamePid)
   end
 
   def handle_message(message, _slack) do
-    if String.starts_with?(message.text, Slork.get_config(:command_prefix)) do
+    if String.starts_with?(message.text, SlorkConfig.get(:command_prefix)) do
       cmd =
         message.text
         |> String.slice(1, 999)
@@ -29,7 +29,7 @@ defmodule Slork.Game do
   def run_command(channel, command) do
     commands = GameConfig.get_config(channel) ++ [command]
     if length(commands) == 1 do
-      Logger.info("loading existing game for #{channel}")
+      IO.puts("Loading existing game for channel #{channel}")
       load_existing_game(channel)
       run_command(channel, command)
     else
@@ -80,7 +80,7 @@ defmodule Slork.Game do
     response
   end
 
-  defp zork_dir, do: Slork.get_config(:zork_dir)
-  defp zork_tmp_dir, do: Slork.get_config(:zork_tmp_dir)
+  defp zork_dir, do: SlorkConfig.get(:zork_dir)
+  defp zork_tmp_dir, do: SlorkConfig.get(:zork_tmp_dir)
   defp zork_file(channel), do: "#{zork_tmp_dir}/zork-commands-#{channel}"
 end

@@ -1,10 +1,11 @@
 defmodule Slork do
   use Application
 
-  def start(_type, _args) do
+  def start(_type, args) do
     import Supervisor.Spec, warn: false
 
     children = [
+      worker(Slork.SlorkConfig, args),
       worker(Slork.Bot, []),
       worker(Slork.Game, [])
     ]
