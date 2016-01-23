@@ -10,4 +10,8 @@ defmodule Slork.GameConfig do
   def update_config(channel, commands) do
     Agent.update(__MODULE__, fn map -> Map.put(map, channel, commands) end)
   end
+
+  def reset(channel) do
+    Agent.update(__MODULE__, fn map -> Map.delete(map, channel) end)
+  end
 end

@@ -17,6 +17,10 @@ defmodule Slork.Game do
         |> String.strip
       case cmd do
         "map" -> "#{Slork.get_config(:map_url)}"
+        "reset" ->
+          File.rm(zork_file(message.channel))
+          GameConfig.reset(message.channel)
+          "lolstupid"
         _ -> run_command(message.channel, cmd) |> format_response
       end
     end
