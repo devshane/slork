@@ -3,7 +3,7 @@ defmodule Slork.SlorkConfigTest do
   alias Slork.SlorkConfig
 
   test "can store slork config" do
-    SlorkConfig.start_config
+    SlorkConfig.start_link
     assert SlorkConfig.get("not_created_yet") == nil
 
     SlorkConfig.set(:command_prefix, "!")
@@ -11,7 +11,7 @@ defmodule Slork.SlorkConfigTest do
   end
 
   test "can setup config based on options" do
-    SlorkConfig.start_config([option: "value"])
+    SlorkConfig.start_link([option: "value"])
     assert SlorkConfig.get(:option) == "value"
   end
 end
