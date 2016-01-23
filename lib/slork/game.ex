@@ -15,7 +15,10 @@ defmodule Slork.Game do
         message.text
         |> String.slice(1, 999)
         |> String.strip
-      run_command(message.channel, cmd) |> format_response
+      case cmd do
+        "map" -> "#{Slork.get_config(:map_url)}"
+        _ -> run_command(message.channel, cmd) |> format_response
+      end
     end
   end
 
